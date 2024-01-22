@@ -12,7 +12,7 @@ app.get("/weather", function(req, res) {
     const city = "Astana";
     console.log("city is" + city)
     const weatherUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=0220b2ecd57ffeff232b00b52385a170&units=metric";
-
+    console.log(weatherUrl);
 
     https.get(weatherUrl, function(apiRes) {
         let data = '';
@@ -20,9 +20,11 @@ app.get("/weather", function(req, res) {
         apiRes.on('data', function(chunk) {
             data += chunk;
         });
+        console.log(data)
 
         apiRes.on('end', function() {
             const weatherData = JSON.parse(data);
+            console.log(weatherData)
             const icon = weatherData.weather[0].icon;
             res.json({
                 temperature: weatherData.main.temp,
@@ -37,6 +39,7 @@ app.get("/weather", function(req, res) {
                 description: weatherData.weather[0].description,
                 iconUrl: "https://openweathermap.org/img/wn/" + icon + "@2x.png"
             });
+            console.log("end")
         });
     });
 });
