@@ -1,12 +1,49 @@
-var city = "Astana"
+function sendData() {
+    const searchCity = document.getElementById('searchCity').value;
+    console.log(searchCity);
 
-document.addEventListener('DOMContentLoaded', function() {
-    fetch('/weather')
+    fetch('/weather?city=${searchCity}')
         .then(response => response.json())
         .then(data => {
-            document.getElementById('temperature').innerText = city + ` ${data.temperature}`;
-            document.getElementById('weather-description').innerText = `Weather description: ${data.description}`;
-            document.getElementById('weather-icon').src = `https://openweathermap.org/img/wn/${data.icon}@2x.png`;
+            processLiveWeather(data, searchCity);
         })
-        .catch(error => console.error('Error fetching weather data:', error));
-});
+    .catch(error => console.error('Error sending data to server:', error));
+}
+
+function processLiveWeather(data, city) {
+    console.log("processLiveWeather is")
+    document.getElementById('city').innerText = city;
+    document.getElementById('temperature').innerText = `${data.temperature}°C`;
+    document.getElementById('weather-description').innerText = `Outside is ${data.description}`;
+    document.getElementById('weather-icon').src = `${data.iconUrl}`;
+    document.getElementById('feelsLike').innerText = `Feels like ${data.feelsLike}°C`;
+    document.getElementById('wind').innerText = `Wind speed: ${data.windSpeed}m/s`;
+    document.getElementById('country').innerText = `Country code: ${data.countryCode}`;
+    document.getElementById('humidity').innerText = `Humidity: ${data.humidity}%`;
+    document.getElementById('pressure').innerText = `Pressure: ${data.pressure} mbar`;
+    document.getElementById('lon').innerText = `Lon: ${data.lon}`;
+    document.getElementById('lat').innerText = `Lat: ${data.lat}`;
+    document.getElementById('rain').innerText = `Rain level ${data.rain}`;
+}
+
+// document.addEventListener('DOMContentLoaded', function() {
+//     fetch('/weather')
+//         .then(response => response.json())
+//         .then(data => {
+//             document.getElementById('city').innerText = document.getElementById('searchCity').value;
+//             document.getElementById('temperature').innerText = `${data.temperature}°C`;
+//             document.getElementById('weather-description').innerText = `Outside is ${data.description}`;
+//             document.getElementById('weather-icon').src = `${data.iconUrl}`;
+//             document.getElementById('feelsLike').innerText = `Feels like ${data.feelsLike}°C`;
+//             document.getElementById('wind').innerText = `Wind speed: ${data.windSpeed}m/s`;
+//             document.getElementById('country').innerText = `Country code: ${data.countryCode}`;
+//             document.getElementById('humidity').innerText = `Humidity: ${data.humidity}%`;
+//             document.getElementById('pressure').innerText = `Pressure: ${data.pressure} mbar`;
+//             document.getElementById('lon').innerText = `Lon: ${data.lon}`;
+//             document.getElementById('lat').innerText = `Lat: ${data.lat}`;
+//             document.getElementById('rain').innerText = `Rain level ${data.rain}`;
+//         })
+//         .catch(error => console.error('Error fetching weather data:', error));
+// });
+
+

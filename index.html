@@ -7,13 +7,49 @@
     <title>Live Weather App</title>
 </head>
 <body>
-    <div class="search">
-        <input id="search" type="text">
-    </div>
-    <div class="weather-container">
-        <h1 id="temperature">Temp is </h1>
-        <h3 id="weather-description">Weather description: </h3>
-        <img id="weather-icon" src="" alt="Weather Icon">
+    <div class="container">
+
+        <!-- SEARCH BOX -->
+        <div class="search-box">
+            <form onsubmit="sendData()" id="searchForm">
+                <input id="searchCity" type="text" placeholder="search city by name">
+                <button type="submit"">Search</button>
+            </form>
+            
+        </div>
+
+        <!-- WEATHER CONTAINER -->
+        <div class="weather-container">
+            <h1 id="city">City is</h1>
+            <div id="country">Country code</div>
+            <div class="temp">
+                <div id="temperature">Temperature is </div>
+                <div id="feelsLike">Feels like </div>
+            </div>
+            
+            <div class="desc">
+                <div id="weather-description">Weather description: </div>
+            <img id="weather-icon" src="" alt="Weather Icon">
+            </div>
+            <div id="wind">Wind speed: </div>
+
+        </div>
+
+        <!-- MAP BOX -->
+        <div class="map-box">
+
+        </div>
+
+        <!-- ADDITIONAL INFO -->
+        <div class="add-info">
+            <h2>Additional Weather Information</h2>
+            <div id="humidity">Humidity</div>
+            <div id="pressure">Pressure</div>
+            <div id="lon">longitude</div>
+            <div id="lat">latitude</div>
+            <div id="rain">Rain level for last 1h is 0</div>
+        </div>
+
     </div>
     <script src="script.js"></script>
 </body>

@@ -5,16 +5,33 @@ body {
     padding: 20px;
 }
 
-.weather-container {
+.container {
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+}
+
+.search-box,
+.weather-container,
+.map-box,
+.add-info {
     background-color: #fff;
     border-radius: 10px;
-    padding: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin: 20px;
+}
+
+.search-box {
     max-width: 400px;
-    margin: auto;
+}
+
+.weather-container {
+    max-width: 400px;
+    
 }
 
 #weather-icon {
     width: 100px;
     height: 100px;
 }
+
