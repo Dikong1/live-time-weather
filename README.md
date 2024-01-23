@@ -23,3 +23,4 @@ The Live Weather App is a web application that provides real-time weather inform
 1. Clone repository
 2. Install all dependencies
 3. Run server-side application (node app.js)
+P.S. To see updated map info please refresh the page
