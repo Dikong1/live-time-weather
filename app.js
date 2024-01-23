@@ -5,6 +5,7 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const openExchangeApi = "cde30c9712e647aaba74f5926869446b";
 
+
 app.use(express.static(path.join(__dirname, '')));
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -70,17 +71,34 @@ app.get("/exchangeRate", function(req, res) {
     });
 });
 
+app.get('/publicHolidays', function(req, res) {
+    const nagerApiUrl = 'https://date.nager.at/api/v3/NextPublicHolidaysWorldwide';
+  
+    https.get(nagerApiUrl, function(apiRes) {
+      let data = '';
+  
+      apiRes.on('data', function(chunk) {
+        data += chunk;
+      });
+  
+      apiRes.on('end', function() {
+        const publicHolidaysData = JSON.parse(data);
+        console.log(publicHolidaysData);
+  
+        // Extracting only date and name from each holiday
+        const nextPublicHolidays = publicHolidaysData.map(holiday => ({
+          date: holiday.date,
+          name: holiday.name
+        }));
+  
+        res.json({
+          nextHolidays: nextPublicHolidays
+        });
+      });
+    });
+});
 
-// app.get('/exchangeRate', function(req, res) {
-//     const apiUrl = `https://openexchangerates.org/api/latest.json?app_id=${openExchangeApi}`;
-//     const response = axios.get(apiUrl);
 
-//     const rates = response.data.rates;
-//     console.log(rates);
-//     res.json({ rates });
-//   });
-
-// Route for the root path
 app.get("/", function(req, res) {
     res.send("Welcome to the Weather App!");
 });

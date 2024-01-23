@@ -35,3 +35,23 @@ body {
     height: 100px;
 }
 
+#holidays {
+    margin-top: 20px;
+}
+
+#holidays ul {
+    list-style: none;
+    padding: 0;
+}
+
+#holidays li {
+    margin-bottom: 8px;
+    font-size: 16px;
+}
+
+#holidays li::before {
+    content: '•';  /* Use a bullet point as a list item marker */
+    margin-right: 8px;
+    color: #3498db;  /* Set the color of the bullet point */
+}
+
