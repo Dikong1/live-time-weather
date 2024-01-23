@@ -10,6 +10,8 @@ The Live Weather App is a web application that provides real-time weather inform
 - **Additional Information:** Provides additional weather details such as humidity, pressure, wind speed, and more.
 - **MAP:** Users can look for map information by entering the name of a city.
 - **Search:** Users able to search for a required city.
+- **Exchange Rate:** Exchange rates for KZT-USD are shown
+- **Public Holidays:** Worldwide Public Holidays are shown
 
 ## Technologies Used
 
@@ -18,6 +20,11 @@ The Live Weather App is a web application that provides real-time weather inform
 - HTML
 - CSS
 - JavaScript
+
+## API`s used
+- OpenWeather API (keys already set)
+- OpenExchange API (keys already set)
+- Nager.Date API (no keys needed)
 
 ## Setup and Usage
 1. Clone repository
