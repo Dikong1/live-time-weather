@@ -54,6 +54,22 @@ function processLiveWeather(data) {
             console.log(".....................................");
         // })    
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+    displayExchangeRate();
+});
+
+function displayExchangeRate() {
+    fetch(`/exchangeRate`)
+        .then(response => response.json())
+        .then(data => {
+            const exchangeRateElement = document.getElementById('exchange-rate');
+            if (exchangeRateElement) {
+                exchangeRateElement.innerText = `Exchange Rate USD to KZT: ${data.kzt}`;
+                console.log(`Exchange Rate: ${data.kzt}`);
+            }
+        })
+}
   
 
 // document.addEventListener('DOMContentLoaded', function() {

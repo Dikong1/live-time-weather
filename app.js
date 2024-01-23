@@ -2,7 +2,8 @@ const express = require('express');
 const https = require('https');
 const app = express();
 const path = require('path');
-const bodyParser = require('body-parser')
+const bodyParser = require('body-parser');
+const openExchangeApi = "cde30c9712e647aaba74f5926869446b";
 
 app.use(express.static(path.join(__dirname, '')));
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -45,6 +46,39 @@ app.get("/weather", function(req, res) {
         });
     });
 });
+
+app.get("/exchangeRate", function(req, res) {
+    const exchangeRateUrl = `https://openexchangerates.org/api/latest.json?app_id=${openExchangeApi}`;
+    console.log(exchangeRateUrl);
+
+    https.get(exchangeRateUrl, function(apiRes) {
+        let data = '';
+
+        apiRes.on('data', function(chunk) {
+            data += chunk;
+        });
+        console.log(data)
+
+        apiRes.on('end', function() {
+            const exchangeData = JSON.parse(data);
+            console.log(exchangeData)
+            res.json({
+                kzt: exchangeData.rates.KZT
+            });
+            console.log("end")
+        });
+    });
+});
+
+
+// app.get('/exchangeRate', function(req, res) {
+//     const apiUrl = `https://openexchangerates.org/api/latest.json?app_id=${openExchangeApi}`;
+//     const response = axios.get(apiUrl);
+
+//     const rates = response.data.rates;
+//     console.log(rates);
+//     res.json({ rates });
+//   });
 
 // Route for the root path
 app.get("/", function(req, res) {
