@@ -1,3 +1,13 @@
+function initMap(lat, lon) {
+    const map = L.map('map').setView([lat, lon], 10);
+  
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© OpenStreetMap contributors'
+    }).addTo(map);
+  
+    L.marker([lat, lon]).addTo(map);
+}
+
 function sendData(event) {
     event.preventDefault();
     const searchCity = document.getElementById('searchCity').value;
@@ -40,9 +50,11 @@ function processLiveWeather(data) {
             document.getElementById('lon').innerText = `Lon: ${data.lon}`;
             document.getElementById('lat').innerText = `Lat: ${data.lat}`;
             document.getElementById('rain').innerText = `Rain level ${data.rain ? data.rain['3h'] : 0}`;
+            initMap(data.lat, data.lon);
             console.log(".....................................");
         // })    
 }
+  
 
 // document.addEventListener('DOMContentLoaded', function() {
 //     fetch('/weather')
