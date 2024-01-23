@@ -9,9 +9,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // Endpoint to fetch weather data
 app.get("/weather", function(req, res) {
-    const city = "Astana";
+    const city = req.query.city;
+    const api = "2aa273236a076d23964c0e001d2d7a43"
     console.log("city is" + city)
-    const weatherUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=0220b2ecd57ffeff232b00b52385a170&units=metric";
+    const weatherUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + api + "&units=metric";
     console.log(weatherUrl);
 
     https.get(weatherUrl, function(apiRes) {
@@ -24,9 +25,10 @@ app.get("/weather", function(req, res) {
 
         apiRes.on('end', function() {
             const weatherData = JSON.parse(data);
-            console.log(weatherData)
+            console.log(weatherData, weatherData.name)
             const icon = weatherData.weather[0].icon;
             res.json({
+                name: weatherData.name,
                 temperature: weatherData.main.temp,
                 feelsLike: weatherData.main.feels_like,
                 pressure: weatherData.main.pressure,
